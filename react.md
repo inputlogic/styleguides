@@ -5,10 +5,9 @@ Just some React best practices, or guidances, that are preferred. However, any o
 ## Table of Contents
 
   1. [Basic Rules](#basic-rules)
-  1. [Organization](#organization)
   1. [Class vs stateless](#class-vs-stateless)
   1. [Naming](#naming)
-  1. [Declaration](#declaration)
+  1. [Organization](#organization)
   1. [Alignment](#alignment)
   1. [Props](#props)
   1. [Refs](#refs)
@@ -16,7 +15,6 @@ Just some React best practices, or guidances, that are preferred. However, any o
   1. [Tags](#tags)
   1. [Methods](#methods)
   1. [Ordering](#ordering)
-  1. [`isMounted`](#ismounted)
 
 ## Basic Rules
 
@@ -106,6 +104,24 @@ Just some React best practices, or guidances, that are preferred. However, any o
     // good
     <MyComponent variant='fancy' />
     ```
+
+
+## Organization
+
+  [Feature Folders](http://marisks.net/2016/02/16/feature-folders-vs-tech-folders/) over Tech Folders. This allows code that relies on other code to always live in adjacent files. It is encouraged to keep code in feature folders, unless it is generic enough that it is used across many 'features'. When some code is used widely throughout your app, it will need to live in a more general folder, E.g. `util/`.
+
+  ```
+  apps/     # In React Native, this may be called `screens/` - this is where 'feature' folders will exist
+  elements/ # Generic, widely-used Components
+  forms/    # Generic, widely-used Form Components (these should not include data/submission logic)
+  hoc/      # Generic, widely-used Higher order Components
+  modals/   # Generic, widely-used Modal Components
+  nav/      # In React Native, your Navigation components 
+  util/     # Little, helpful functions
+  consts.js # Constants
+  index.js  # The root of your app!
+  store.js  # Where you initialize your store and export a store instance
+  ```
 
 ## Alignment
 
