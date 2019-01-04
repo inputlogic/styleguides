@@ -455,6 +455,35 @@ Just some React best practices, or guidances, that are preferred. However, any o
       }
     }
     ```
+    
+  - You could also use static arrow functions instead of binding a method:
+  
+    ```jsx
+    class Statics extends React.Component {
+      onClickDiv = () => {
+        // do stuff
+      }
+
+      render() {
+        return <div onClick={this.onClickDiv} />
+      }
+    }
+    ```
+  
+    Note, this is not technically equivalent to a bound method. At the time of writing, Babel will compile a static arrow function as follow:
+    
+    ```jsx
+    class Static extends React.Component {
+      constructor(...args) {
+        var _temp;
+
+        return _temp = super(...args), this.onClickDiv = () => {
+          // do stuff
+        }, _temp;
+      }
+    ```
+    
+    In practical terms, this means the method will not exist on the instance prototype. This is only a problem if you are extending a Class (don't do it!), or hoping to mock a method in your tests. There could be other edge cases that I am not currently aware of.
 
   - Be sure to return a value in your `render` methods.
 
